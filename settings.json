@@ -24,5 +24,45 @@
         "chaine": "France 5",
         "multicast": "239.1.1.1",
         "port": 1234
+    },
+    "chaine 5": {
+        "chaine": "France 5",
+        "multicast": "239.1.1.1",
+        "port": 1234
+    },
+    "chaine 6": {
+        "chaine": "France 5",
+        "multicast": "239.1.1.1",
+        "port": 1234
+    },
+    "chaine 7": {
+        "chaine": "France 5",
+        "multicast": "239.1.1.1",
+        "port": 1234
+    },
+    "chaine 8": {
+        "chaine": "France 5",
+        "multicast": "239.1.1.1",
+        "port": 1234
+    },
+    "chaine 9": {
+        "chaine": "France 5",
+        "multicast": "239.1.1.1",
+        "port": 1234
+    },
+    "chaine 10": {
+        "chaine": "France 5",
+        "multicast": "239.1.1.1",
+        "port": 1234
+    },
+    "chaine 11": {
+        "chaine": "France 5",
+        "multicast": "239.1.1.1",
+        "port": 1234
+    },
+    "chaine 12": {
+        "chaine": "France 5",
+        "multicast": "239.1.1.1",
+        "port": 1234
     }
 }

@@ -69,12 +69,17 @@ def deteclist(event):
         fichier = "settings.json"
         with open(fichier, "r") as f:
             settings = json.load(f)
-            pt=settings[chselected]["port"]
-            ch=settings[chselected]["chaine"]
-            ip=settings[chselected]["multicast"]
-            varpt.set(f"{pt}")
-            varch.set(f"{ch}")
-            varipm.set(f"{ip}")
+            try:
+                pt=settings[chselected]["port"]
+                ch=settings[chselected]["chaine"]
+                ip=settings[chselected]["multicast"]
+                varpt.set(f"{pt}")
+                varch.set(f"{ch}")
+                varipm.set(f"{ip}")
+            except:
+                varpt.set(f"CHAÎNE INEXISTANTE")
+                varch.set(f"CHAÎNE INEXISTANTE")
+                varipm.set(f"CHAÎNE INEXISTANTE")
 
 pl_select.bind("<<ListboxSelect>>",deteclist)
 
@@ -83,20 +88,21 @@ def jsonread():
     selected_indices = pl_select.curselection()
     for i in selected_indices:
         chselected = pl_select.get(i)
-        print(chselected)
         fichier = "settings.json"
         with open(fichier, "r") as f:
             settings = json.load(f)
+        try:
+            chaine=var_chaine.get()
+            multicast = var_multicast.get()
+            port = var_port.get()
+            settings[chselected]["chaine"]=chaine
+            settings[chselected]["multicast"]=multicast
+            settings[chselected]["port"]=port
 
-        chaine=var_chaine.get()
-        multicast = var_multicast.get()
-        port = var_port.get()
-        settings[chselected]["chaine"]=chaine
-        settings[chselected]["multicast"]=multicast
-        settings[chselected]["port"]=port
-
-        with open(fichier,"w") as f:
-            settings = json.dump(settings,f,indent=4)
+            with open(fichier,"w") as f:
+                settings = json.dump(settings,f,indent=4)
+        except:
+            pass
 
 
 bouton_envoyer = ttk.Button(frame_button,text="ENVOYER", command=jsonread)
