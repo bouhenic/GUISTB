@@ -1,0 +1,28 @@
+{
+    "chaine 1": {
+        "chaine": "M6",
+        "multicast": "239.1.1.1",
+        "port": 1234,
+        "M6": "TF1"
+    },
+    "chaine 2": {
+        "chaine": "France 2",
+        "multicast": "239.1.1.2",
+        "port": 1234
+    },
+    "chaine 3": {
+        "chaine": "France 3",
+        "multicast": "239.1.1.3",
+        "port": 1234
+    },
+    "chaine 4": {
+        "chaine": "",
+        "multicast": "239.1.1.1",
+        "port": ""
+    },
+    "chaine 5": {
+        "chaine": "France 5",
+        "multicast": "239.1.1.1",
+        "port": 1234
+    }
+}
