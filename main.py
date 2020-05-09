@@ -1,3 +1,4 @@
+#interface de configuration d'une Set top Box, sauvegarde des paramètres en fichier JSON
 import json
 import tkinter as tk
 from tkinter import ttk
@@ -6,6 +7,8 @@ root=tk.Tk()
 root.geometry("600x300")
 root.title("CONFIGURATION SET-TOP BOX")
 
+#définition des layouts, frame_button, frame_list, frame_input(frame_input1 et frame_input2)
+# et frame_output (frame_input1 et frame_input2)
 frame_button=ttk.Frame(root)
 frame_button.pack(fill="both",side="bottom",expand="true")
 frame_list = ttk.Frame(root)
@@ -29,9 +32,16 @@ frame_output2.pack(fill="both",side="top",expand="true")
 frame_output3 = ttk.Frame(frame_output)
 frame_output3.pack(fill="both",side="top",expand="true")
 
+#Définition de la liste
 titre_liste=tk.Label(frame_list,text="CHAÎNES UTILISEES",bg="#E5E7E9",font=('Helvetica', 18, 'bold')).pack(fill="both")
+liste_chaines = ("chaine 1", "chaine 2", "chaine 3", "chaine 4", "chaine 5", "chaine 6","chaine 7", "chaine 8", "chaine 9",
+                 "chaine 10", "chaine 11", "chaine 12")
 
+pl = tk.StringVar(value=liste_chaines)
+pl_select = tk.Listbox(frame_list, listvariable=pl, height=6,bg="grey")
+pl_select.pack(padx=10, pady=10)
 
+#Définition des champs de saisie d'entrée
 Nom_chaine=tk.Label(frame_input1,text="Nom de la chaîne :",anchor="w",bg="#E5E7E9").pack(side="left",fill="both",expand=True)
 var_chaine = tk.StringVar()
 entry_chaine = tk.Entry(frame_input1,textvariable=var_chaine, width=20).pack(side="left",fill="both", expand=True)
@@ -44,16 +54,12 @@ port=tk.Label(frame_input3,text="PORT :",anchor="w",bg="#E5E7E9").pack(side="lef
 var_port = tk.IntVar()
 entry_port = tk.Entry(frame_input3,textvariable=var_port, width=20).pack(side="left",fill="both", expand=True)
 
-liste_chaines = ("chaine 1", "chaine 2", "chaine 3", "chaine 4", "chaine 5", "chaine 6","chaine 7", "chaine 8", "chaine 9",
-                 "chaine 10", "chaine 11", "chaine 12")
-
-pl = tk.StringVar(value=liste_chaines)
-pl_select = tk.Listbox(frame_list, listvariable=pl, height=6,bg="grey")
-pl_select.pack(padx=10, pady=10)
+#Définition des champs de sortie
 
 varpt = tk.StringVar()
 varch = tk.StringVar()
 varipm= tk.StringVar()
+
 label_chaine_lu=ttk.Label(frame_output1,text="Nom de la chaîne :",anchor="w").pack(side="left",fill="both",expand=True)
 Nom_chaine_lu=ttk.Label(frame_output1,textvariable=varch,anchor="w").pack(side="left",fill="both",expand=True)
 label_multicast_lu=tk.Label(frame_output2,text="IP Multicast :",anchor="w",bg="#E5E7E9").pack(side="left",fill="both", expand=True)
@@ -61,8 +67,9 @@ ip_multicast_lu=tk.Label(frame_output2,textvariable=varipm,anchor="w",bg="#E5E7E
 port_label=tk.Label(frame_output3,text="PORT :",anchor="w",bg="#E5E7E9").pack(side="left",fill="both", expand=True)
 port_lu=tk.Label(frame_output3,textvariable=varpt,anchor="w",bg="#E5E7E9").pack(side="left",fill="both", expand=True)
 
+#Fonction sélection de la chaîne, lecture du fichier JSON affichage des paramètres
 
-def deteclist(event):
+def jsonread(event):
     selected_indices = pl_select.curselection()
     for i in selected_indices:
         chselected=pl_select.get(i)
@@ -81,10 +88,11 @@ def deteclist(event):
                 varch.set(f"CHAÎNE INEXISTANTE")
                 varipm.set(f"CHAÎNE INEXISTANTE")
 
-pl_select.bind("<<ListboxSelect>>",deteclist)
+pl_select.bind("<<ListboxSelect>>",jsonread)
 
+# écriture des paramètres dans le fichier JSON
 
-def jsonread():
+def jsonwrite():
     selected_indices = pl_select.curselection()
     for i in selected_indices:
         chselected = pl_select.get(i)
@@ -104,13 +112,12 @@ def jsonread():
         except:
             pass
 
+#définition des boutons envoyer et quitter
 
-bouton_envoyer = ttk.Button(frame_button,text="ENVOYER", command=jsonread)
+bouton_envoyer = ttk.Button(frame_button,text="ENVOYER", command=jsonwrite)
 bouton_envoyer.pack(side="left",expand="true")
 bouton_quitter = ttk.Button(frame_button,text="QUITTER", command=root.destroy)
 bouton_quitter.pack(side="left",expand="true")
-
-
 
 
 root.mainloop()

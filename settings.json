@@ -1,6 +1,6 @@
 {
     "chaine 1": {
-        "chaine": "M6",
+        "chaine": "TF1",
         "multicast": "239.1.1.1",
         "port": 1234,
         "M6": "TF1"
@@ -16,53 +16,48 @@
         "port": 1234
     },
     "chaine 4": {
-        "chaine": "",
-        "multicast": "239.1.1.1",
-        "port": ""
-    },
-    "chaine 5": {
-        "chaine": "France 5",
-        "multicast": "239.1.1.1",
+        "chaine": "France 4",
+        "multicast": "239.1.1.5",
         "port": 1234
     },
     "chaine 5": {
         "chaine": "France 5",
-        "multicast": "239.1.1.1",
+        "multicast": "239.1.1.6",
         "port": 1234
     },
     "chaine 6": {
-        "chaine": "France 5",
-        "multicast": "239.1.1.1",
+        "chaine": "M6",
+        "multicast": "239.1.1.7",
         "port": 1234
     },
     "chaine 7": {
-        "chaine": "France 5",
-        "multicast": "239.1.1.1",
+        "chaine": "ARTE",
+        "multicast": "239.1.1.8",
         "port": 1234
     },
     "chaine 8": {
-        "chaine": "France 5",
-        "multicast": "239.1.1.1",
-        "port": 1234
+        "chaine": "",
+        "multicast": "",
+        "port": 0
     },
     "chaine 9": {
-        "chaine": "France 5",
-        "multicast": "239.1.1.1",
+        "chaine": "C8",
+        "multicast": "239.1.1.19",
         "port": 1234
     },
     "chaine 10": {
-        "chaine": "France 5",
-        "multicast": "239.1.1.1",
-        "port": 1234
+        "chaine": "",
+        "multicast": "",
+        "port": 0
     },
     "chaine 11": {
-        "chaine": "France 5",
-        "multicast": "239.1.1.1",
-        "port": 1234
+        "chaine": "",
+        "multicast": "",
+        "port": 0
     },
     "chaine 12": {
-        "chaine": "France 5",
-        "multicast": "239.1.1.1",
-        "port": 1234
+        "chaine": "",
+        "multicast": "",
+        "port": 0
     }
 }
