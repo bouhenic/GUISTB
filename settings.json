@@ -6,8 +6,8 @@
         "M6": "TF1"
     },
     "chaine 2": {
-        "chaine": "France 2",
-        "multicast": "239.1.1.2",
+        "chaine": "test",
+        "multicast": "239.1.1.1",
         "port": 1234
     },
     "chaine 3": {

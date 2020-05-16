@@ -1,11 +1,27 @@
 #interface de configuration d'une Set top Box, sauvegarde des paramètres en fichier JSON
 import json
+import os
+import signal
 import tkinter as tk
 from tkinter import ttk
+from threading import Thread
+import psutil
 
 root=tk.Tk()
 root.geometry("600x300")
 root.title("CONFIGURATION SET-TOP BOX")
+
+#class déclenchant la lecture d'une chaine dans un thread
+class Lecture(Thread):
+
+    def __init__(self,ip,port):
+        Thread.__init__(self)
+        self.ip=ip
+        self.port=port
+
+    def run(self):
+        os.system(f"ffplay udp://@{self.ip}:{self.port}")
+
 
 #définition des layouts, frame_button, frame_list, frame_input(frame_input1 et frame_input2)
 # et frame_output (frame_input1 et frame_input2)
@@ -40,6 +56,38 @@ liste_chaines = ("chaine 1", "chaine 2", "chaine 3", "chaine 4", "chaine 5", "ch
 pl = tk.StringVar(value=liste_chaines)
 pl_select = tk.Listbox(frame_list, listvariable=pl, height=6,bg="grey")
 pl_select.pack(padx=10, pady=10)
+
+def play():
+    selected_indices = pl_select.curselection()
+    for i in selected_indices:
+        chselected = pl_select.get(i)
+        fichier = "settings.json"
+        with open(fichier, "r") as f:
+            settings = json.load(f)
+            try:
+                pt = settings[chselected]["port"]
+                ip = settings[chselected]["multicast"]
+                #on kill le process ffplay si il existe avant d'instancier un thread de lecture
+                process = filter(lambda p: p.name() == "ffplay", psutil.process_iter())
+                for i in process:
+                    pid = i.pid
+                    os.kill(pid, signal.SIGTERM)
+                thread = Lecture(ip,pt)
+                thread.start()
+            except:
+                pass
+
+def stop():#méthode relative au bouton Stop pour tuer le process ffplay si il existe
+    process = filter(lambda p: p.name() == "ffplay", psutil.process_iter())
+    for i in process:
+        pid=i.pid
+        os.kill(pid,signal.SIGTERM)
+
+bouton_lecture = ttk.Button(frame_list,text="LECTURE", command=play)
+bouton_lecture.pack(side="left",expand="true")
+
+bouton_stop = ttk.Button(frame_list,text="STOP", command=stop)
+bouton_stop.pack(side="left",expand="true")
 
 #Définition des champs de saisie d'entrée
 Nom_chaine=tk.Label(frame_input1,text="Nom de la chaîne :",anchor="w",bg="#E5E7E9").pack(side="left",fill="both",expand=True)
